@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Valentin Horacek">
+    <title>Formulář</title>
+</head>
+<body>
+    <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/02-formular-zobrazeni.php"
+    method="POST" target="_blank">
+        <label>Jméno:</label>
+        <input type="text" name="login" value="John" maxlength="5" required><br>
+        <input type="email" name="mail" placeholder="@gmail.com"><br>
+        <input type="password" name="heslo"><br>
+
+        <input type="radio" name="pohlavi" id="pohlavi-muz" value="Muz" >
+        <label for="pohlavi-muz">Muž</label><br>
+        <input type="radio" name="pohlavi" id="pohlavi-zena" value="Zena" >
+        <label for="pohlavi-zena">Žena</label><br>
+
+        <input type="date" name="naroyeni"><br>
+
+        <input type="color" name="barva"><br>
+
+        <input type="file" name="foto" accept="image/*"><br>
+
+        <input type="number" name="vyska" min="50" max="250" step="10" value="170"><br>
+
+        <input oninput="vysledek.value=parseInt(deti.value)" type="range" name="deti" id="deti" min="0" max="100" value="50">
+        <output name="vysledek" for="deti">50
+        </output><br>
+
+        <select name="auto">
+            <optgroup label="ŠVÉDSKÁ">
+                <option value="Volvo">Volvo</option>
+                <option value="Saab">Saab</option>
+            </optgroup>
+            <optgroup label="NĚMECKÁ">
+                <option value="Mercedes" selected>Mercedes</option>
+                <option value="Audi">Audi</option>
+            </optgroup>
+        </select><br>
+
+        <select name="zvire[]" multiple size="3">
+            <option>Pes</option>
+            <option>Kočka</option>
+            <option>Slon</option>
+            <option>Krocan</option>
+            <Option>Kráva</Option>
+        </select><br>
+
+        <input type="submit" value="Odeslat">
+
+        <button type="button" onclick="alert('Hello World')">
+            Hello World
+        </button>
+    </form>
+</body>
+</html>
