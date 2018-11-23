@@ -1,6 +1,7 @@
 <!doctype html>
 <?php 
     // načtení souboru s funkcemi
+    include("funkce.php");
 ?>
 <html lang="cs">
     <head>
@@ -10,7 +11,7 @@
     <body>
         <h1>Formulář</h1>
         
-        <form action="" method="">
+        <form action="vystup.php" method="POST">
             <fieldset>
                 <legend>Registrační formulář</legend>
 
@@ -36,6 +37,10 @@
                     <select name="zvire[]" size="5" multiple>
 <?php
     // načtení voleb do SELECT
+    $zvirata = vypis();
+    foreach($zvirata as $key => $zvire){
+        echo "<option value='$key'>$zvire</option>";
+    }
 ?>
                     </select><br>
                     <br>

@@ -1,6 +1,7 @@
 <!doctype html>
 <?php 
     // načtení souboru s funkcemi
+    require("funkce.php");
 ?>
 <html>
     <head>
@@ -13,6 +14,7 @@
         <div><strong>Post:</strong> <br>
 <?php
     // pokud je, vypíše přijaté pole do tabulky
+    echo tabulka($_POST);
 ?>
         </div>
         <br>
@@ -20,6 +22,7 @@
         <div><strong>Get:</strong> <br>
 <?php
     // pokud je, vypíše přijaté pole do tabulky
+    echo tabulka($_GET);
 ?>
         </div>
         
