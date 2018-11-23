@@ -6,7 +6,9 @@
     <title>Formulář</title>
 </head>
 <body>
-    <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/02-formular-zobrazeni.php"
+    <!--<form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/02-formular-zobrazeni.php"
+    -->
+    <form action="formular-zobrazeni.php"
     method="POST" target="_blank">
         <label>Jméno:</label>
         <input type="text" name="login" value="John" maxlength="5" required><br>
@@ -49,6 +51,11 @@
             <Option>Kráva</Option>
         </select><br>
 
+        <textarea rows="4" cols="30">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed tellus viverra, dictum lectus quis, pharetra lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce eget pulvinar erat. Aliquam ac commodo libero, in lobortis nisi. Donec felis eros, porta eu turpis sed, feugiat volutpat nibh. Etiam in nunc massa. Fusce vulputate porta purus dictum viverra. Sed sed consectetur nibh, a semper risus. Mauris rhoncus dolor quis nisi fringilla condimentum. Mauris commodo purus vitae eros mattis, non maximus dolor consectetur. Nulla neque enim, volutpat et ornare in, suscipit sit amet purus.
+        </textarea>
+
+        <input type="reset" value="Smazat">
         <input type="submit" value="Odeslat">
 
         <button type="button" onclick="alert('Hello World')">
