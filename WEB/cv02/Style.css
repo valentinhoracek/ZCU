@@ -1,0 +1,79 @@
+body {
+    background: linear-gradient(red, orange, yellow, white);
+}
+
+#obal {
+    size: 600px;
+    alignment: center;
+    margin: 10px auto;
+    background: rgba(255,255,255,0.5);
+}
+
+header {
+    font-size: xx-large;
+    text-align: center;
+    color: darkred;
+    padding: 10px;
+}
+
+nav {
+    border-bottom: 2px dotted brown;
+    padding: 15px;
+}
+
+nav a {
+    margin: 3px;
+    padding: 20px;
+    padding-top: 5px;
+    border: 1px solid blue;
+    background-color: lightblue;
+    font-family: sans-serif;
+    font: bolder;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: black;
+    color: white;
+    text-decoration: underline;
+}
+
+.chyba {
+    color: darkred;
+    border: 2px solid darkred;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#novinky {
+    size: 110px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid darkgreen;
+    border-radius: 20px;
+    float: right;
+}
+
+article {
+    margin: 20px;
+    size: 420px;
+    text-align: justify;
+}
+
+p:hover {
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+
+footer {
+    text-align: center;
+    color: white;
+}
