@@ -1,0 +1,30 @@
+#pokus a {
+    background-color: #e1ff9a;
+}
+
+#pokus a:hover {
+    background-color: #a0ff45;
+}
+
+#pokus a:hover span::after {
+    content: "ABC";
+    background-color: #ff0000;
+}
+
+#pokus tr:nth-child(even) {
+    background-color: #2e74ff;
+}
+
+/*#pokus td:nth-child(odd) {
+    background-color: #ff00bd;
+}*/
+
+#pokus tr:nth-child(3n) {
+    background-color: #00ffea;
+}
+
+.uchyt {
+    position: sticky;
+    top: 10px;
+    background-color: #9933cc;
+}
