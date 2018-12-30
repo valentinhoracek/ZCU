@@ -10,10 +10,18 @@ class Database{
         /*$this->db = new PDO("mysql:host='DB_SERVER'; dbname='DB_NAME'",
             DB_USER, DB_PASS );
         session_start();*/
+
+
+
         global $db_server, $db_name, $db_user, $db_pass;
         // informace se berou ze settings
         $this->db = new PDO("mysql:host=$db_server;dbname=$db_name", $db_user, $db_pass);
         session_start();
+
+        $q = "SET character_set_results = 'utf8', character_set_client = 'utf8',
+              character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'";
+
+        $this->executeQuery($q);
     }
 
     private function executeQuery($dotaz) {
