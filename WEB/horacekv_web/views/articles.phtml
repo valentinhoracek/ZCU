@@ -1,0 +1,122 @@
+<div class="text-center">
+    <h1>
+        Articles
+    </h1>
+    VISITOR - can see accepted articles
+    AUTHOR - see own articles in which state they are
+            ACCEPTED - score
+            DECLINED - score
+            IN_REVIEW
+            - can edit declined - EDITOR
+            - can delete declined/accepted
+            -
+    REVIEWER, ADMIN - see articles for review
+    <div class="accordion" id="accordionExample">
+        <?php
+            if ($_SESSION['signed'])
+            {
+        ?>
+        <!-- FIRST-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        My Articles
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Abstract</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $this->tableOfArticles();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php
+                if ($_SESSION['user']['ROLE'] == "ADMIN" || $_SESSION['user']['ROLE'] == "REVIEWER")
+                {
+        ?>
+        <!-- SECOND-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                       Not reviewed articles
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Abstract</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $this->tableOfArticlesUnderReview();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php
+                }
+            }
+        ?>
+        <!-- THIRD-->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        All articles
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Abstract</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $this->tableOfArticlesAccepted();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

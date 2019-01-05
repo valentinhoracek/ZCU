@@ -1,0 +1,14 @@
+<h1>
+    Welcome
+</h1>
+
+<?php
+if (isset($_SESSION['newLogin']) && $_SESSION['newLogin'])
+{
+    echo "<div class=\"alert alert-light\" role=\"alert\">
+        Login successful! Welcome " . $_SESSION['user'][1] . ".</div>";
+    $_SESSION['newLogin'] = false;
+
+}
+
+?>

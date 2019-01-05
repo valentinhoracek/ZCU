@@ -1,0 +1,18 @@
+<?php
+
+include_once ("basic.phtml");
+
+head(
+    $this->metadata['title'],
+    $this->metadata['keywords'],
+    $this->metadata['description'],
+    $this->metadata['local_path']
+);
+
+require ("views/$this->view.phtml");
+
+foot();
+
+
+?>
+

@@ -1,0 +1,146 @@
+<?php
+// zaklad stranky
+//global $local_path;
+//$local_path = "horacekv_web";
+
+function head(
+    $title = "",
+    $keywords = "",
+    $description = "",
+    $local_path = "horacekv_web/"
+){
+    ?>
+   <!DOCTYPE html>
+<html lang="cs-cz">
+<head>
+    <base href="/localhost" />
+    <meta charset="UTF-8" />
+    <title><?= $title ?></title>
+    <meta name="description" content="<?= $description ?>" />
+    <meta name="keywords" content="<?= $keywords ?>" />
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header>
+    <h1>GeCon - Gaming Conference</h1>
+</header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="<?= $local_path?>index.php">Gaming Conference</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php
+                            if (isset($_SESSION['user']))
+                            {
+                                echo $_SESSION['user']['LOGIN'];
+                            }
+                            else
+                            {
+                                echo "Account";
+                            }
+                        ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <?php
+                            if (!$_SESSION['signed'])
+                            {
+                        ?>
+                        <a class="dropdown-item" href="<?= $local_path?>index.php?page=login">Login</a>
+                        <a class="dropdown-item" href="<?= $local_path?>index.php?page=registration">Registration</a>
+                        <?php
+                            }
+                            elseif ($_SESSION['signed'])
+                            {
+                        ?>
+                        <a class="dropdown-item" href="<?= $local_path?>index.php?page=account">Account</a>
+                        <a class="dropdown-item" href="<?= $local_path?>index.php?page=logout">Logout</a>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $local_path?>index.php?page=info">Info<span class="sr-only">(current)</span></a>
+                </li>
+                <?php
+                    if (isset($_SESSION['user']) && $_SESSION['user']['ROLE'] == "ADMIN")
+                    {
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $local_path?>index.php?page=administration">Administration<span class="sr-only">(current)</span></a>
+                </li>
+                <?php
+                    }
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $local_path?>index.php?page=articles">Articles<span class="sr-only">(current)</span></a>
+                </li>
+                <?php
+                    if ($_SESSION['signed'])
+                    {
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $local_path?>index.php?page=editor">Editor<span class="sr-only">(current)</span></a>
+                </li>
+                <?php
+                    }
+                ?>
+                <!--<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>-->
+
+            </ul>
+
+        </div>
+    </nav>
+<br clear="both" />
+
+<div>
+
+    <?php
+}
+
+function foot(){
+    ?>
+    </div>
+    <footer>
+        <p></p>
+    </footer>
+    <footer class="footer mt-auto bg-dark py-3 mt-10">
+        <div class="container">
+            <span class="text-muted">Tento web byl vytvořen v rámci semestrální práce z předmětu KIV/WEB, zdrojové soubory jsou dostuné na adrese
+            <a href="https://github.com/valentinhoracek/ZCU/tree/master/WEB/" target="_blank">www.github.com</a>.</span>
+        </div>
+    </footer>
+    </body>
+    </html>
+
+
+    <?php
+
+}
+
+
+
+?>
