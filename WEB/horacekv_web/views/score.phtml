@@ -1,0 +1,39 @@
+<div class="text-center">
+    <h1>
+        Score
+    </h1>
+</div>
+<div class="text-center">
+    <div class="accordion" id="accordionExample">
+        <!-- RATING OF CHOOSEN ARTICLE-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Rating
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Reviewer</th>
+                            <th scope="col">Score 1</th>
+                            <th scope="col">Score 2</th>
+                            <th scope="col">Score 3</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $this->tableScoreOfMyArticle();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

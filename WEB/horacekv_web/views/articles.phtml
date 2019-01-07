@@ -11,12 +11,14 @@
             - can delete declined/accepted
             -
     REVIEWER, ADMIN - see articles for review
+</div>
+<div class="text-center">
     <div class="accordion" id="accordionExample">
         <?php
             if ($_SESSION['signed'])
             {
         ?>
-        <!-- FIRST-->
+        <!-- MY ARTICLES-->
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
@@ -31,17 +33,16 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">File Name</th>
                             <th scope="col">Abstract</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">File</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Reviews</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                            $this->tableOfArticles();
+                            $this->tableOfMyArticles();
                         ?>
                         </tbody>
                     </table>
@@ -49,10 +50,11 @@
             </div>
         </div>
         <?php
-                if ($_SESSION['user']['ROLE'] == "ADMIN" || $_SESSION['user']['ROLE'] == "REVIEWER")
+                if ($_SESSION['user']['ROLE'] == "ADMIN" )
+
                 {
         ?>
-        <!-- SECOND-->
+        <!-- ARTICLES UNDER REVIEW-->
         <div class="card">
             <div class="card-header" id="headingTwo">
                 <h2 class="mb-0">
@@ -66,12 +68,11 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">File Name</th>
                             <th scope="col">Abstract</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">File</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Reviews</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -85,28 +86,65 @@
         </div>
         <?php
                 }
+                if ( $_SESSION['user']['ROLE'] == "REVIEWER" || $_SESSION['user']['ROLE'] == "ADMIN" )
+                {
+                    if ($_SESSION['areReviews'])
+                    {
+        ?>
+                    <!-- ARTICLES FOR ME TO REVIEW-->
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Articles for me to review
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">File Name</th>
+                                        <th scope="col">Abstract</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">Reviews</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $this->tableOfArticlesMyReview();
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+        <?php
+                    }
+                }
             }
         ?>
-        <!-- THIRD-->
+        <!-- ALL ARTICLES-->
         <div class="card">
-            <div class="card-header" id="headingThree">
+            <div class="card-header" id="headingFour">
                 <h2 class="mb-0">
-                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         All articles
                     </button>
                 </h2>
             </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">File Name</th>
                             <th scope="col">Abstract</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">File</th>
+                            <th scope="col">Reviews</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -195,12 +195,54 @@ class Database{
             return false;
         }
     }
+
+    public function updateArticleInfo($articleID, $title, $fileName, $fileData, $abstract, $reviews, $state, $authorID)
+    {
+        $fileData = addslashes($fileData);
+        $q = "UPDATE horacekv_articles
+                SET TITLE='$title', FILE_NAME='$fileName', FILE_DATA='$fileData', ABSTRACT='$abstract',
+                REVIEWS='$reviews', STATE='$state', ID_AUTHOR='$authorID'
+                WHERE ID_ARTICLE=$articleID";
+        $res = $this->execute($q);
+        if($res == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function deleteReviewsForArticle($articleID)
+    {
+        $q = "DELETE FROM horacekv_reviews
+                WHERE ID_ARTICLE='$articleID'";
+        $res = $this->execute($q);
+        if($res == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function deleteArticle($articleID)
+    {
+
+        $q = "DELETE FROM horacekv_articles
+                WHERE ID_ARTICLE='$articleID'";
+        $res = $this->execute($q);
+        if($res == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      *  Upravi informace o danem uzivateli.
      *  ... vse potrebne ...
      *  @return boolean         Podarilo se data upravit?
      */
-    public function updateUserInfo($userID, $fullName, $email, $login, $password, $role){
+    public function updateUserInfo($userID, $fullName, $email, $login, $password, $role)
+    {
         $q = "UPDATE horacekv_users
                 SET FULL_NAME='$fullName', LOGIN='$login', PASSWORD='$password', EMAIL='$email', ROLE='$role' 
                 WHERE ID_USER=$userID";
@@ -217,9 +259,61 @@ class Database{
      *  @param integer $userId  ID uzivatele.
      *  @return boolean         Podarilo se?
      */
-    public function deleteUser($userId){
-        $q = "DELETE FROM horacev_users
-                WHERE ID=$userId";
+    public function deleteUser($userID)
+    {
+        $q = "DELETE FROM horacekv_users
+                WHERE ID_USER=$userID";
+        $res = $this->execute($q);
+        if($res == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function allReviewsInfo()
+    {
+        $q = "SELECT * FROM horacekv_reviews";
+        $res = $this->execute($q);
+        $res = $this->resultObjectToArray($res);
+        //print_r($res);
+        if($res != null && count($res)>0){
+            // vracim vse
+            return $res;
+        } else {
+            return null;
+        }
+    }
+
+    public function allReviewInfo($reviewID)
+    {
+        $q = "SELECT * FROM horacekv_reviews
+              WHERE horacekv_reviews.ID_REVIEW = '$reviewID'";
+        $res = $this->execute($q);
+        $res = $this->resultObjectToArray($res);
+
+        if ($res != null && count($res) > 0) {
+            return $res[0];
+        } else {
+            return null;
+        }
+    }
+
+    public function addNewReview($reviewerID, $articleID){
+        $q = "INSERT INTO horacekv_reviews(ID_REVIEW, ID_REVIEWER, ID_ARTICLE)
+              VALUES ('null','$reviewerID','$articleID')";
+        $res = $this->execute($q);
+        if($res == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function updateReviewInfo($reviewID, $reviewerID, $articleID, $score1, $score2, $score3){
+        $q = "UPDATE horacekv_reviews
+                SET ID_REVIEWER='$reviewerID', ID_ARTICLE='$articleID', SCORE_1='$score1', SCORE_2='$score2', SCORE_3='$score3' 
+                WHERE ID_REVIEW='$reviewID' ";
         $res = $this->execute($q);
         if($res == null){
             return false;

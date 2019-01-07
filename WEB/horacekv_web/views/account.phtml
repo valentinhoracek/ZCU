@@ -21,13 +21,9 @@
                    id="exampleInputLogin" placeholder="Enter your full name" name="fullName"
                    value="<?php
                    if ($managing)
-                   {
                        echo $_SESSION['managedUser']['FULL_NAME'];
-                   }
                    else
-                   {
                        echo $_SESSION['user']['FULL_NAME'];
-                   }
                    ?>">
 
         </div>
@@ -35,32 +31,67 @@
             <label for="exampleInputEmail1">E-mail address</label>
             <input type="email" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-dark"
                    id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email"
-                   value="<?= $_SESSION['user']['EMAIL'] ?>">
+                   value="<?php
+                   if ($managing)
+                       echo $_SESSION['managedUser']['EMAIL'];
+                   else
+                       echo $_SESSION['user']['EMAIL'];
+                   ?>">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group text-center">
             <label for="exampleInputLogin">Login</label>
             <input type="text" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-dark"
                    id="exampleInputLogin" placeholder="Enter login" name="login"
-                   value="<?= $_SESSION['user']['LOGIN'] ?>">
+                   value="<?php
+                   if ($managing)
+                       echo $_SESSION['managedUser']['LOGIN'];
+                   else
+                       echo $_SESSION['user']['LOGIN'];
+                   ?>">
 
         </div>
+        <?php
+        if ($managing)
+        {
+        ?>
         <div class="form-group text-center">
-            <label for="exampleInputPassword1">Old Password</label>
+            <label for="exampleInputRole">Role</label><br>
+            <select class="custom-select form-control col-lg-2 col-md-4 col-sm-6 btn-dark bg-dark" name="role">
+                <option value="ADMIN" <?php if ($_SESSION['managedUser']['ROLE'] == "ADMIN") echo "selected";?>>ADMIN</option>
+                <option value="REVIEWER" <?php if ($_SESSION['managedUser']['ROLE'] == "REVIEWER") echo "selected";?>>REVIEWER</option>
+                <option value="AUTHOR" <?php if ($_SESSION['managedUser']['ROLE'] == "AUTHOR") echo "selected";?>>AUTHOR</option>
+            </select>
+        </div>
+            <button type="submit" name="delete"
+                    class="btn col-lg-1 col-md-2 col-sm-3 btn-danger">Delete</button>
+            <button type="submit" name="manage"
+                    class="btn col-lg-1 col-md-2 col-sm-3 btn-dark">Manage</button>
+        <?php
+        }
+        else
+        {
+        ?>
+        <div class="form-group text-center">
+            <label for="exampleInputPassword">Old Password</label>
             <input type="password" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-dark"
-                   id="exampleInputPassword1" placeholder="Old Password" name="oldPassword">
+                   id="exampleInputPassword" placeholder="Old Password" name="oldPassword">
         </div>
         <div class="form-group text-center">
-            <label for="exampleInputPassword1">New Password</label>
+            <label for="exampleInputPassword">New Password</label>
             <input type="password" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-dark"
-                   id="exampleInputPassword1" placeholder="New Password" name="password">
+                   id="exampleInputPassword" placeholder="New Password" name="password">
         </div>
         <div class="form-group text-center">
             <input type="password" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-dark"
-                   id="exampleInputPassword1" placeholder="New Password (agian)" name="passwordCheck">
+                   id="exampleInputPassword" placeholder="New Password (agian)" name="passwordCheck">
             <small id="passwordHelp" class="form-text text-muted">Never share your password with anyone else.</small>
         </div>
-        <button type="submit" name="update"
-                class="btn col-lg-2 col-md-4 col-sm-6 btn-dark">Update</button>
+            <button type="submit" name="update"
+                    class="btn col-lg-2 col-md-4 col-sm-6 btn-dark">Update</button>
+        <?php
+        }
+        ?>
+
     </form>
 </div>

@@ -29,11 +29,11 @@ class Administration extends Controller
                 <tr>
                     <th scope=\"row\">
                         <button onclick=\"window.location=' " . $local_path . "index.php?page=account&manager=". $u['LOGIN'] ."'\" 
-                            name=\"user_" . $u['ID_USER'] . "\" class=\"btn btn-dark col-lg-2 col-md-3 col-sm-6\" type=\"button\">
-                            " . $i . "
+                            class=\"btn btn-dark col-lg-2 col-md-3 col-sm-6\" type=\"button\">
+                            " . $u['LOGIN'] . "
                         </button>
                     </th>
-                    <td>" . $u['LOGIN'] . "</td>
+                    <td>" . $u['EMAIL'] . "</td>
                     <td>" . $u['FULL_NAME'] . "</td>
                 </tr>";
             }

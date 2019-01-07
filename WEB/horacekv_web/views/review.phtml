@@ -1,0 +1,68 @@
+<div class="text-center">
+    <h1>
+        Review
+    </h1>
+</div>
+<?php
+
+?>
+<div class="text-center">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group text-center">
+            <label for="exampleInputTitle">Title</label>
+            <input type="text" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-secondary"
+                   id="exampleInputTitle" placeholder="Enter title of an article" name="title"
+                   value="<?=$_SESSION['reviewedArticle']['TITLE']?>" disabled>
+
+        </div>
+        <div class="form-group text-center">
+            <label for="exampleInputFile">PDF document</label>
+            <input type="text" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-secondary"
+                   id="exampleInputFile" name="file" accept="application/pdf"
+                   value="<?=$_SESSION['reviewedArticle']['FILE_NAME']?>" disabled>
+        </div>
+        <div class="form-group text-center">
+            <label for="exampleInputAbstract">Abstract</label>
+            <textarea type="text" class="form-control col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3 btn-secondary"
+                      id="exampleInputAbstract" placeholder="Enter abstract" name="abstract"
+                      disabled><?=$_SESSION['reviewedArticle']['ABSTRACT']?></textarea>
+        </div>
+        <div class="form-group text-center">
+            <label for="exampleInputScore1">Score 1</label><br>
+            <select class="custom-select form-control col-lg-2 col-md-3 col-sm-4 btn-dark bg-dark" name="score1">
+                <option value="" disabled selected>Select reviewer</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group text-center">
+            <label for="exampleInputScore2">Score 2</label><br>
+            <select class="custom-select form-control col-lg-2 col-md-3 col-sm-4 btn-dark bg-dark" name="score2">
+                <option value="" disabled selected>Select reviewer</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group text-center">
+            <label for="exampleInputScore2">Score 3</label><br>
+            <select class="custom-select form-control col-lg-2 col-md-3 col-sm-4 btn-dark bg-dark" name="score3">
+                <option value="" disabled selected>Select reviewer</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button type="submit" name="rate"
+                class="btn col-lg-2 col-md-3 col-sm-4 btn-dark">Rate</button>
+    </form>
+</div>
+
+
