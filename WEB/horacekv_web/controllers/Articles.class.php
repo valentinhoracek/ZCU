@@ -19,15 +19,14 @@ class Articles extends Controller
     public function tableOfMyArticles()
     {
         $local_path = "horacekv_web/";
-
-        foreach ($_SESSION['articles'] as $a)
+        if (isset($_SESSION['articles']))
         {
-            if ($a['ID_AUTHOR'] == $_SESSION['user']['ID_USER'])
-            {
-                echo "
+            foreach ($_SESSION['articles'] as $a) {
+                if ($a['ID_AUTHOR'] == $_SESSION['user']['ID_USER']) {
+                    echo "
                 <tr>
                     <th scope=\"row\">
-                        <button onclick=\"window.location=' " . $local_path . "index.php?page=editor&edited=". $a['TITLE'] ."'\"
+                        <button onclick=\"window.location=' " . $local_path . "index.php?page=editor&edited=" . $a['TITLE'] . "'\"
                             name=\"article_" . $a['ID_ARTICLE'] . "\" class=\"btn btn-dark col-12\" type=\"button\">
                             " . $a['TITLE'] . "
                         </button>
@@ -36,12 +35,13 @@ class Articles extends Controller
                     <td>" . $a['ABSTRACT'] . "</td>
                     <td>" . $a['STATE'] . "</td>          
                     <th scope=\"row\">
-                        <button onclick=\"window.location=' " . $local_path . "index.php?page=score&rating=". $a['TITLE'] ."'\"
+                        <button onclick=\"window.location=' " . $local_path . "index.php?page=score&rating=" . $a['TITLE'] . "'\"
                             name=\"article_" . $a['ID_ARTICLE'] . "\" class=\"btn btn-dark col-12\" type=\"button\">
                             " . $a['REVIEWS'] . "
                         </button>
                     </th>
                 </tr>";
+                }
             }
         }
     }
@@ -52,20 +52,16 @@ class Articles extends Controller
     public function tableOfArticlesMyReview()
     {
         $local_path = "horacekv_web/";
-        foreach ($_SESSION['articles'] as $a)
-        {
-            if ($a['STATE'] == "UNDER REVIEW")
-            {
-                foreach ($_SESSION['reviews'] as $r)
-                {
-                    if ($_SESSION['user']['ID_USER'] == $r['ID_REVIEWER'] && $r['SCORE_1'] == 0)
-                    {
-                        if ($a['ID_ARTICLE'] == $r['ID_ARTICLE'])
-                        {
-                            echo "
+        if (isset($_SESSION['articles'])) {
+            foreach ($_SESSION['articles'] as $a) {
+                if ($a['STATE'] == "UNDER REVIEW") {
+                    foreach ($_SESSION['reviews'] as $r) {
+                        if ($_SESSION['user']['ID_USER'] == $r['ID_REVIEWER'] && $r['SCORE_1'] == 0) {
+                            if ($a['ID_ARTICLE'] == $r['ID_ARTICLE']) {
+                                echo "
                         <tr>
                             <th scope=\"row\">
-                                <button onclick=\"window.location=' " . $local_path . "index.php?page=review&review=". $r['ID_REVIEW'] ."&article=". $a['TITLE'] ."'\"
+                                <button onclick=\"window.location=' " . $local_path . "index.php?page=review&review=" . $r['ID_REVIEW'] . "&article=" . $a['TITLE'] . "'\"
                                     name=\"article_" . $a['ID_ARTICLE'] . "\" class=\"btn btn-dark col-12\" type=\"button\">
                                     " . $a['TITLE'] . "
                                 </button>
@@ -75,6 +71,7 @@ class Articles extends Controller
                             <td>" . $a['STATE'] . "</td>
                             <td>" . $a['REVIEWS'] . "</td>
                         </tr>";
+                            }
                         }
                     }
                 }
@@ -88,14 +85,13 @@ class Articles extends Controller
     public function tableOfArticlesUnderReview()
     {
         $local_path = "horacekv_web/";
-        foreach ($_SESSION['articles'] as $a)
-        {
-            if ($a['STATE'] == "UNDER REVIEW")
-            {
-                echo "
+        if (isset($_SESSION['articles'])) {
+            foreach ($_SESSION['articles'] as $a) {
+                if ($a['STATE'] == "UNDER REVIEW") {
+                    echo "
                 <tr>
                     <th scope=\"row\">
-                        <button onclick=\"window.location=' " . $local_path . "index.php?page=assignment&article=". $a['TITLE'] ."'\"
+                        <button onclick=\"window.location=' " . $local_path . "index.php?page=assignment&article=" . $a['TITLE'] . "'\"
                             name=\"article_" . $a['ID_ARTICLE'] . "\" class=\"btn btn-dark col-12\" type=\"button\">
                             " . $a['TITLE'] . "
                         </button>
@@ -105,6 +101,7 @@ class Articles extends Controller
                     <td>" . $a['STATE'] . "</td>
                     <td>" . $a['REVIEWS'] . "</td>
                 </tr>";
+                }
             }
         }
     }
@@ -114,11 +111,10 @@ class Articles extends Controller
      */
     public function tableOfArticlesAccepted()
     {
-        foreach ($_SESSION['articles'] as $a)
-        {
-            if ($a['STATE'] == "ACCEPTED")
-            {
-                echo "
+        if (isset($_SESSION['articles'])) {
+            foreach ($_SESSION['articles'] as $a) {
+                if ($a['STATE'] == "ACCEPTED") {
+                    echo "
                 <tr>
                     <td>" . $a['TITLE'] . "</td>
                     <td>" . $a['FILE_NAME'] . "</td>
@@ -127,6 +123,7 @@ class Articles extends Controller
                     <!--<td>" . $a['STATE'] . "</td>-->
                     
                 </tr>";
+                }
             }
         }
     }
