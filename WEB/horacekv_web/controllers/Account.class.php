@@ -91,12 +91,47 @@ class Account extends Controller
      */
     public function deleteUser($database)
     {
+        /**
+         * Delete reviews for the user.
+         */
+        $result = $database->deleteReviewsForUser($_SESSION['managedUser']['ID_USER']);
+
+        if (!$result)
+        {
+            echo "<div class=\"alert alert-secondary\" role=\"alert\">
+                    Failed to delete user's reviews!</div>";
+        }
+        else
+        {
+            echo "<div class=\"alert alert-light\" role=\"alert\">
+                    User's reviews deleted!</div>";
+        }
+
+        /**
+         * Delete articles for the user
+         */
+        $result = $database->deleteArticlesForUser($_SESSION['managedUser']['ID_USER']);
+
+        if (!$result)
+        {
+            echo "<div class=\"alert alert-secondary\" role=\"alert\">
+                    Failed to delete user's articles!</div>";
+        }
+        else
+        {
+            echo "<div class=\"alert alert-light\" role=\"alert\">
+                    User's articles deleted!</div>";
+        }
+
+        /**
+         * Delete user entry.
+         */
         $result = $database->deleteUser($_SESSION['managedUser']['ID_USER']);
 
         if (!$result)
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
-                    Failed to delete info!</div>";
+                    Failed to delete user information!</div>";
         }
         else
         {

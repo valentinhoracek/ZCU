@@ -1,0 +1,191 @@
+\documentclass[czech,SP]{thesiskiv}
+
+\author{Valentin Horáček}
+\declarationmale
+\title{Webová aplikace konferenčního systému}
+
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[czech]{babel}
+
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+\tableofcontents
+%
+%	Chapter
+%
+\chapter{Zadání}
+\par
+Vaším úkolem bude vytvořit webové stránky konference.  Téma konference si můžete zvolit libovolné.
+\par
+Uživateli systému jsou autoři příspěvků (vkládají abstrakty článků a PDF dokumenty), recenzenti příspěvků 
+(hodnotí příspěvky) a administrátoři (spravují uživatele, přiřazují příspěvky recenzentům k hodnocení a 
+rozhodují o publikování příspěvků). Každý uživatel se do systému přihlašuje prostřednictvím vlastního 
+uživatelského jména a hesla. Nepřihlášený uživatel vidí pouze publikované příspěvky.
+\par
+Nový uživatel se může do systému zaregistrovat, čímž získá status autora.
+\par
+Přihlášený autor vidí svoje příspěvky a stav, ve kterém se nacházejí (v recenzním řízení 
+/ přijat + hodnocení / odmítnut + hodnocení). Své příspěvky může přidávat, editovat a volitelně i mazat. 
+Rozhodnutí, zda autor může editovat či mazat publikované příspěvky je ponecháno na tvůrci systému.
+\par
+Přihlášený recenzent vidí příspěvky, které mu byly přiděleny k recenzi, a může je hodnotit 
+(nutně alespoň 3 kritéria hodnocení). Pokud příspěvek nebyl dosud publikován, tak své hodnocení může změnit.
+\par
+Přihlášený administrátor spravuje uživatele (určuje jejich role a může uživatele zablokovat či smazat), 
+přiřazuje neschválené příspěvky recenzentům k hodnocení (každý příspěvek bude recenzován minimálně třemi 
+recenzenty) a na základě recenzí rozhoduje o publikování nebo odmítnutí příspěvku. 
+Publikované příspěvky jsou automaticky zobrazovány ve veřejné části webu.
+\par
+Databáze musí obsahovat alespoň 3 tabulky, které budou dostatečně naplněny daty tak, aby bylo možné 
+předvést funkčnost aplikace.
+
+%
+%	Chapter
+%
+\chapter{Použité technologie}
+\section{HTML 5}
+\par
+HyperText Markup Language je jazyk, který se běžně používá pro tvorbu webových stránek. Jazyk pomocí svých
+značek definuje jaký mají jednotlivé stránky vzhled.
+
+\section{PHP}
+\par
+Tento skriptovací programovací jazyk se využívá pro dynamické webové stránky a zejména pro čtení vstupů z formůlářů, tedy
+vstupů od uživatelů. Jednotlivé skripty jsou zpracovávány na straně webového serveru a k uživateli je přenesen
+pouze výsledek jejich činnosti. 
+
+\section{SQL}
+\par
+SQL je strukturovaný dotazovací jazyk pro práci s daty v relačních databázích. Pomocí SQL tedy pomocí jednotlivých dotazů jsem
+získával veškerá potřebná data z databáze.
+
+\section{Bootstrap}
+\par
+Bootstrap je knihovna nástrojů, která obsahuje přednastavené komponenty ať už pomocí CSS nebo JavaScriptu.
+Díky tomu jsem webové aplikace responzivní a dynamický vzhled.
+
+%
+%	Chapter
+%
+\chapter{Adresářová struktura}
+\par
+Adresářová struktura webové aplikace je rozdělena, aby odpovídala architektuře MVC. Mimo tuto strukturu jsou pouze soubory
+\textbf{index.php}, \textbf{settings.inc.php} a \textbf{.htaccess}, které splňují svůj účel v kořenovém adresáři.
+
+\section{controllers}
+\par
+Složka obsahující veškeré kontrolery, tedy řídící část webové aplikace.
+\section{doc}
+\par
+Zde je uložena dokumentace semestrální práce.
+\section{models}
+\par
+Obsahuje soubor s funkcemi pro práci s databází a dva soubory pro vytvoření a naplnění databáze testovacími daty.
+\section{uploads}
+\par
+V této složce jsou uloženy soubory, které uživatelé nahrají při nahrávání článku.
+\section{views}
+\par
+Pro každý kontroler je zde pohled, ve kterém je naprogramováno, jak má stránka vypadat. Kromě daných pohledů jsou zde navíc soubory
+\textbf{basic.phtmp} a \textbf{structure.phtmp} obsahující funkce pro hlavičku a patičku a obecnou strukturu webové aplikace.
+
+%
+%	Chapter
+%
+\chapter{Struktura databáze}
+Databáze obsahuje 3 tabulky - \textbf{users}, \textbf{articles} a \textbf{reviews}, všechny s prefixem \textbf{horacekv\textunderscore XXX}.
+\section{users}
+Tabulka registrovaných uživatelů webové aplikace.
+\begin{itemize}
+\item \textbf{ID\textunderscore USER} - Číselný identifikátor uživatele
+\item \textbf{FULL\textunderscore NAME} - Celé jméno uživatele
+\item \textbf{LOGIN} - Přihlašovací jméno uživatele
+\item \textbf{PASSWORD} - Heslo uživatele zakódováno pomocí \textbf{md5}
+\item \textbf{EMAIL} - Email uživatele
+\item \textbf{ROLE} - Role uživatele: \textbf{AUTHOR}, \textbf{REVIEWER}, \textbf{ADMIN}
+\end{itemize}
+
+\section{articles}
+V této tabulce jsou informace o jednotlivých článcích.
+\begin{itemize}
+\item \textbf{ID\textunderscore ARTICLE} - Číselný identifikátor článku
+\item \textbf{TITLE} - Název článku
+\item \textbf{FILE\textunderscore NAME} - Název nahraného souboru
+\item \textbf{FILE\textunderscore DATA} - Data nahraného souboru
+\item \textbf{ABSTRACT} - Abstrakt článku
+\item \textbf{REVIEWS} - Počet recenzí pro tento článek
+\item \textbf{STATE} - Stav tohoto článku: \textbf{UNDER REVIEW}, \textbf{ACCEPTED}, \textbf{DECLINED}
+\item \textbf{ID\textunderscore AUTHOR} - Číselný identifikátor autora článku
+\end{itemize}
+
+\section{reviews}
+Zde je uložen záznam každé recenze článku.
+
+\begin{itemize}
+\item \textbf{ID\textunderscore REVIEW} - Číselný identifikátor recenze
+\item \textbf{ID\textunderscore REVIEWER} - Číselný identifikátor recenzenta
+\item \textbf{ID\textunderscore ARTICLE} - Číselný identifikátor článku
+\item \textbf{SCORE\textunderscore 1} - První hodnocení
+\item \textbf{SCORE\textunderscore 2} - Druhé hodnocení
+\item \textbf{SCORE\textunderscore 3} - Třetí hodnocení
+\end{itemize}
+
+%
+%	Chapter
+%
+\chapter{Uživatelská příručka}
+
+\section{Nepřihlášený uživatel}
+Nepřihlášený uživatel má k dispozi pouze hlavní stránku, stránku s informacemi, možnost se registrovat či přihlásit
+a prohlížení schválených článků.
+\subsection{Registrace}
+Z hlavní nabídky vyberte možnost \textbf{Account-Registration}. Na nové stránce vyplňte všechny potřebné informace
+a zvolte tlačítko \textbf{Register}. Webová aplikace Vás automaticky přihlásí.
+\subsection{Přihlášení}
+Z nabídky zvolte možnost \textbf{Account-Login}. Nyní zadejte zvolené přihlašovací jméno a heslo.
+\subsection{Prohlížení článků}
+Z hlavního menu vybrte odkaz \textbf{Articles}. Na nové stránce jsou zobrazeny kategorie článků. Pro nepřihlášené uživatele
+jsou vidět pouze schválené články.
+\section{Autor}
+Status autora dostane každý nový uživatel po registraci.
+\subsection{Odhlášení}
+Z hlavní nabídky rozklikněte Vaše uživatelské jméno po kliknutí na možnost \textbf{Logout} Vás systém odhlásí.
+\subsection{Úprava účtu}
+Pod Vaším uživatelským jménem je také možnost \textbf{Account}. Pokud ji zvolíte můžete upravovat všechny svoje informace.
+\subsection{Nahrání článku}
+Možnost \textbf{Editor} v hlavní nabídce umožňuje přihlášeným uživatelům vytvořit nový článek. Je nutné vyplnit všechny pole
+a nahrát PDF soubor.
+\subsection{Úprava článku}
+Pokud máte vytvořen vlastní článek zobrazí se Vám pod možností \textbf{Articles} z hlavní nabídky. Pokud vyberete svůj článek a rozkliknete jeho název
+získáte možnost ho upravit nebo smazat.
+\subsection{Detail hodnocení článku}
+Z nabídky svých článku se také můžete podívat na hodnocení vašich článků. Stačí kliknout v tabulce na počet recenzí u vašeho článku
+a zobrazí se Vám nová tabulka se jmény recenzentů a hodnocením zvoleného článku.
+\section{Recenzent}
+Pokud se stanene recenzenty přibudou Vám nové možnosti.
+\subsection{Hodnocení článku}
+Jste-li vybráni k recenzi nějakého článku zobrazí se Vám tyto články jako nová kategorie na stránce \textbf{Articles}. 
+Vyberte článek a budete přesměrováni na novou stránku,na které můžete vybrat svoje hodnocení. Jakmile své hodnocení odešlete nebude ho možné změnit.
+\section{Admin}
+
+\subsection{Úprava uživatelů}
+Administrátorům se v hlavní nabídce zobrazuje možnost \textbf{Administration}, která zobrazuje všechny uživatele dle jejich práv v aplikaci.
+Po vybrání jednoho z uživatelů lze uživatele vymazat nebo změnit jejich práva.
+\subsection{Zadání recenze}
+Pro administrátory se také objeví nová kategorie článků. Jedná se o články, které ještě neprošly recenzí nebo recenzí není dostatečný počet.
+Po vybrání článku z této kategorie lze určit recenzenta z nabídky.
+
+%
+%	Chapter
+%
+\chapter{Závěr}
+\par
+Semestrální práce splňuje zadání v celém rozsahu. Webová aplikace asi není ihned použitelný web, je potřeba doplnit konkrétní informace o konferenci a
+o kritériích hodnocení článku.
+Díky využívání nástroje Bootstrap nebylo potřeba vytvářet nové styly a třídy, ale stačilo využít nabízené možnosti pro vytvoření
+jednoduchého responzivního designu.
+
+\end{document}

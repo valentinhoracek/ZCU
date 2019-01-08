@@ -1,0 +1,35 @@
+\babel@toc {british}{}
+\babel@toc {czech}{}
+\contentsline {chapter}{\numberline {1}Zad\IeC {\'a}n\IeC {\'\i }}{3}% 
+\contentsline {chapter}{\numberline {2}Pou\IeC {\v z}it\IeC {\'e} technologie}{4}% 
+\contentsline {section}{\numberline {2.1}HTML 5}{4}% 
+\contentsline {section}{\numberline {2.2}PHP}{4}% 
+\contentsline {section}{\numberline {2.3}SQL}{4}% 
+\contentsline {section}{\numberline {2.4}Bootstrap}{4}% 
+\contentsline {chapter}{\numberline {3}Adres\IeC {\'a}\IeC {\v r}ov\IeC {\'a} struktura}{5}% 
+\contentsline {section}{\numberline {3.1}controllers}{5}% 
+\contentsline {section}{\numberline {3.2}doc}{5}% 
+\contentsline {section}{\numberline {3.3}models}{5}% 
+\contentsline {section}{\numberline {3.4}uploads}{5}% 
+\contentsline {section}{\numberline {3.5}views}{5}% 
+\contentsline {chapter}{\numberline {4}Struktura datab\IeC {\'a}ze}{6}% 
+\contentsline {section}{\numberline {4.1}users}{6}% 
+\contentsline {section}{\numberline {4.2}articles}{6}% 
+\contentsline {section}{\numberline {4.3}reviews}{7}% 
+\contentsline {chapter}{\numberline {5}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{8}% 
+\contentsline {section}{\numberline {5.1}Nep\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'y} u\IeC {\v z}ivatel}{8}% 
+\contentsline {subsection}{\numberline {5.1.1}Registrace}{8}% 
+\contentsline {subsection}{\numberline {5.1.2}P\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{8}% 
+\contentsline {subsection}{\numberline {5.1.3}Prohl\IeC {\'\i }\IeC {\v z}en\IeC {\'\i } \IeC {\v c}l\IeC {\'a}nk\IeC {\r u}}{8}% 
+\contentsline {section}{\numberline {5.2}Autor}{8}% 
+\contentsline {subsection}{\numberline {5.2.1}Odhl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{8}% 
+\contentsline {subsection}{\numberline {5.2.2}\IeC {\'U}prava \IeC {\'u}\IeC {\v c}tu}{8}% 
+\contentsline {subsection}{\numberline {5.2.3}Nahr\IeC {\'a}n\IeC {\'\i } \IeC {\v c}l\IeC {\'a}nku}{9}% 
+\contentsline {subsection}{\numberline {5.2.4}\IeC {\'U}prava \IeC {\v c}l\IeC {\'a}nku}{9}% 
+\contentsline {subsection}{\numberline {5.2.5}Detail hodnocen\IeC {\'\i } \IeC {\v c}l\IeC {\'a}nku}{9}% 
+\contentsline {section}{\numberline {5.3}Recenzent}{9}% 
+\contentsline {subsection}{\numberline {5.3.1}Hodnocen\IeC {\'\i } \IeC {\v c}l\IeC {\'a}nku}{9}% 
+\contentsline {section}{\numberline {5.4}Admin}{9}% 
+\contentsline {subsection}{\numberline {5.4.1}\IeC {\'U}prava u\IeC {\v z}ivatel\IeC {\r u}}{9}% 
+\contentsline {subsection}{\numberline {5.4.2}Zad\IeC {\'a}n\IeC {\'\i } recenze}{9}% 
+\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{10}% 

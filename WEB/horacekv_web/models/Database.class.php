@@ -369,14 +369,14 @@ class Database{
     }
 
     /**
-     * Method for deleting reviews of given article.
+     * Method for deleting an article.
      *
      * @param $articleID
      * @return bool
      */
-    public function deleteReviewsForArticle($articleID)
+    public function deleteArticle($articleID)
     {
-        $query = "DELETE FROM horacekv_reviews
+        $query = "DELETE FROM horacekv_articles
                 WHERE ID_ARTICLE='$articleID'";
         $result = $this->execute($query);
         if ($result == null)
@@ -390,15 +390,15 @@ class Database{
     }
 
     /**
-     * Method for deleting an article.
+     * Method for deleting article of given user.
      *
-     * @param $articleID
+     * @param $userID
      * @return bool
      */
-    public function deleteArticle($articleID)
+    public function deleteArticlesForUser($userID)
     {
         $query = "DELETE FROM horacekv_articles
-                WHERE ID_ARTICLE='$articleID'";
+                WHERE ID_AUTHOR='$userID'";
         $result = $this->execute($query);
         if ($result == null)
         {
@@ -500,6 +500,47 @@ class Database{
             return true;
         }
     }
-}
 
+    /**
+     * Method for deleting reviews of given user.
+     *
+     * @param $userID
+     * @return bool
+     */
+    public function deleteReviewsForUser($userID)
+    {
+        $query = "DELETE FROM horacekv_reviews
+                WHERE ID_REVIEWER='$userID'";
+        $result = $this->execute($query);
+        if ($result == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    /**
+     * Method for deleting reviews of given article.
+     *
+     * @param $articleID
+     * @return bool
+     */
+    public function deleteReviewsForArticle($articleID)
+    {
+        $query = "DELETE FROM horacekv_reviews
+                WHERE ID_ARTICLE='$articleID'";
+        $result = $this->execute($query);
+        if ($result == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}
 ?>
