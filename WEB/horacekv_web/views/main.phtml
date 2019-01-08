@@ -1,14 +1,17 @@
-<h1>
-    Welcome
-</h1>
-
 <?php
+/**
+ * If user just logged in show alert message.
+ */
 if (isset($_SESSION['newLogin']) && $_SESSION['newLogin'])
 {
     echo "<div class=\"alert alert-light\" role=\"alert\">
         Login successful! Welcome " . $_SESSION['user'][1] . ".</div>";
     $_SESSION['newLogin'] = false;
-
 }
-
 ?>
+<div class="text-center">
+    <h1>
+       Welcome
+    </h1>
+    This web site is about GeCon - Game Conference.
+</div>

@@ -1,15 +1,29 @@
 <?php
 
+/**
+ * Class Account
+ *
+ * You can change your own account information.
+ * Admins can manage other user's information or delete users.
+ */
 class Account extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "account";
         $this->metadata['title'] = "Account - GeCon";
     }
 
+    /**
+     * Method for updating user's information.
+     *
+     * @param $database
+     */
     public function updateUser($database)
     {
+        /**
+         * Check if inputs are filled.
+         */
         if (!$_POST['fullName'])
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -37,38 +51,49 @@ class Account extends Controller
         }
         else
         {
-
+            /**
+             * If new password isn't set
+             */
             if ($_POST['password'] == "")
             {
-                $heslo = $_SESSION['user']['PASSWORD'];
+                $password = $_SESSION['user']['PASSWORD'];
             }
             else
             {
-                $heslo = md5($_POST['password']);
+                $password = md5($_POST['password']);
             }
 
+            /**
+             * Update information in database.
+             */
             $database->updateUserInfo(
                 $_SESSION['user']['ID_USER'],
                 $_POST['fullName'],
                 $_POST['email'],
                 $_POST['login'],
-                $heslo,
+                $password,
                 $_SESSION['user']['ROLE']
             );
 
-            $database->userLogin($_SESSION['user']['LOGIN'], $heslo);
+            /**
+             * Login user.
+             */
+            $database->userLogin($_SESSION['user']['LOGIN'], $password);
             echo "<div class=\"alert alert-light\" role=\"alert\">
                             Account info changed!</div>";
         }
-
-
     }
 
+    /**
+     * Method for deleting user.
+     *
+     * @param $database
+     */
     public function deleteUser($database)
     {
-        $res = $database->deleteUser($_SESSION['managedUser']['ID_USER']);
+        $result = $database->deleteUser($_SESSION['managedUser']['ID_USER']);
 
-        if (!$res)
+        if (!$result)
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Failed to delete info!</div>";
@@ -80,8 +105,16 @@ class Account extends Controller
         }
     }
 
+    /**
+     * Method for managing other user's information.
+     *
+     * @param $database
+     */
     public function manageUser($database)
     {
+        /**
+         * Check if inputs are filled.
+         */
         if (!$_POST['fullName'])
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -99,7 +132,10 @@ class Account extends Controller
         }
         else
         {
-            $res = $database->updateUserInfo(
+            /**
+             * Update information in database.
+             */
+            $result = $database->updateUserInfo(
                 $_SESSION['managedUser']['ID_USER'],
                 $_POST['fullName'],
                 $_POST['email'],
@@ -108,7 +144,7 @@ class Account extends Controller
                 $_POST['role']
             );
 
-            if (!$res)
+            if (!$result)
             {
                 echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Failed to change info!</div>";
@@ -121,21 +157,29 @@ class Account extends Controller
         }
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
+        /**
+         * Managing another users info.
+         */
         if (isset($_GET['manager']))
         {
-            // managing other users
-            //$_SESSION['managedUser'] = $_GET['manager'];
             $_SESSION['managedUser'] = $database->allUserInfo($_GET['manager']);
         }
         else
         {
-            // managing my account
             $_SESSION['managedUser'] = $_SESSION['user'];
         }
-        //echo $_GET['manager'];
-        //$_SESSION['updatingUser'] = $database->allUserInfo($updatedUser);
+
+        /**
+         * Calling function respective to submitted button.
+         */
         if (isset($_POST['update']))
         {
             $this->updateUser($database);
@@ -150,7 +194,12 @@ class Account extends Controller
         }
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
@@ -159,5 +208,4 @@ class Account extends Controller
         }
     }
 }
-
 ?>

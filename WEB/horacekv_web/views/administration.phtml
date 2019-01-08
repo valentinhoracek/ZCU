@@ -1,78 +1,68 @@
 <div class="text-center">
     <h1>
-        ADMINISTRATION
+       Administration
     </h1>
-    Table of users, only for admin, can change rights, and assign articles to review.
-    ADMIN - see user, can change rights
-            - se articles for review and can assign reviewer
+    This site is only visible to admin, select user for managing their information.
+    <div class="p-3 mb-2 bg-dark text-white"></div>
+</div>
+<div class="text-center">
     <div class="accordion" id="accordionExample">
-        <?php
-        if ($_SESSION['user']['ROLE'] == "ADMIN")
-        {
-            ?>
-            <!-- FIRST-->
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            ADMINS
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Login</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Full Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $this->tableOfUsers("ADMIN");
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
+        <!--ADMINS-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        ADMINS
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Login</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Full Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $this->tableOfUsers("ADMIN");
+                        ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <?php
-
-            ?>
-            <!-- SECOND-->
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            REVIEWERS
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Login</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Full Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $this->tableOfUsers("REVIEWER");
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+        <!--REVIEWERS-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-dark col-lg-2 col-md-3 col-sm-6 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        REVIEWERS
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Login</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Full Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $this->tableOfUsers("REVIEWER");
+                        ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <?php
-        }
-        ?>
+        </div>
         <!-- THIRD-->
         <div class="card">
             <div class="card-header" id="headingThree">
@@ -83,9 +73,9 @@
                 </h2>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
                         <tr>
                             <th scope="col">Login</th>
                             <th scope="col">Email</th>

@@ -1,8 +1,13 @@
 <?php
-// zaklad stranky
-//global $local_path;
-//$local_path = "horacekv_web";
 
+/**
+ * Method for creating head of HTML site. Navigation is different for different users.
+ *
+ * @param string $title
+ * @param string $keywords
+ * @param string $description
+ * @param string $local_path
+ */
 function head(
     $title = "",
     $keywords = "",
@@ -18,21 +23,15 @@ function head(
     <title><?= $title ?></title>
     <meta name="description" content="<?= $description ?>" />
     <meta name="keywords" content="<?= $keywords ?>" />
-    <link rel="stylesheet" href="style.css" type="text/css"/>
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 <header>
-
     <div class="text-center">
         <h1>GeCon - Game Conference</h1>
     </div>
@@ -47,32 +46,32 @@ function head(
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php
-                            if (isset($_SESSION['user']))
-                            {
-                                echo $_SESSION['user']['LOGIN'];
-                            }
-                            else
-                            {
-                                echo "Account";
-                            }
+                        if (isset($_SESSION['user']))
+                        {
+                            echo $_SESSION['user']['LOGIN'];
+                        }
+                        else
+                        {
+                            echo "Account";
+                        }
                         ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php
-                            if (!$_SESSION['signed'])
-                            {
+                        if (!$_SESSION['signed'])
+                        {
                         ?>
                         <a class="dropdown-item" href="<?= $local_path?>index.php?page=login">Login</a>
                         <a class="dropdown-item" href="<?= $local_path?>index.php?page=registration">Registration</a>
                         <?php
-                            }
-                            elseif ($_SESSION['signed'])
-                            {
+                        }
+                        elseif ($_SESSION['signed'])
+                        {
                         ?>
                         <a class="dropdown-item" href="<?= $local_path?>index.php?page=account">Account</a>
                         <a class="dropdown-item" href="<?= $local_path?>index.php?page=logout">Logout</a>
                         <?php
-                            }
+                        }
                         ?>
                     </div>
                 </li>
@@ -80,50 +79,40 @@ function head(
                     <a class="nav-link" href="<?= $local_path?>index.php?page=info">Info<span class="sr-only">(current)</span></a>
                 </li>
                 <?php
-                    if (isset($_SESSION['user']) && $_SESSION['user']['ROLE'] == "ADMIN")
-                    {
+                if (isset($_SESSION['user']) && $_SESSION['user']['ROLE'] == "ADMIN")
+                {
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $local_path?>index.php?page=administration">Administration<span class="sr-only">(current)</span></a>
                 </li>
                 <?php
-                    }
+                }
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $local_path?>index.php?page=articles">Articles<span class="sr-only">(current)</span></a>
                 </li>
                 <?php
-                    if ($_SESSION['signed'])
-                    {
+                if ($_SESSION['signed'])
+                {
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $local_path?>index.php?page=editor">Editor<span class="sr-only">(current)</span></a>
                 </li>
                 <?php
-                    }
+                }
                 ?>
-                <!--<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>-->
-
             </ul>
-
         </div>
     </nav>
 <br clear="both" />
 
 <div>
-
     <?php
 }
 
+/**
+ *  Method for creating foot of HTML site.
+ */
 function foot(){
     ?>
     </div>
@@ -138,12 +127,6 @@ function foot(){
     </footer>
     </body>
     </html>
-
-
     <?php
-
 }
-
-
-
 ?>

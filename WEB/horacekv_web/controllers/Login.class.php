@@ -1,18 +1,31 @@
 <?php
 
+/**
+ * Class Login
+ *
+ * Here you can login into the site.
+ */
 class Login extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "login";
         $this->metadata['title'] = "Login - GeCon";
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
-        // Login
         if (isset($_POST['signin']))
         {
+            /**
+             * Check if inputs are filled.
+             */
             if (!$_POST['login'])
             {
                 echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -25,6 +38,9 @@ class Login extends Controller
             }
             else
             {
+                /**
+                 * Login user.
+                 */
                 $result = $database->userLogin($_POST['login'], $_POST['password']);
                 if (!$result)
                 {
@@ -33,25 +49,23 @@ class Login extends Controller
                 }
                 else
                 {
+                    /**
+                     * Go to the main site.
+                     */
                     $_SESSION['signed'] = true;
                     $_SESSION['newLogin'] = true;
                     header('Location: index.php?page=main');
                 }
             }
-        }/*
-        if(isset($_REQUEST["action"]) && $_REQUEST["action"]=="login"){
-            $res = $database->userLogin($_REQUEST["login"],$_REQUEST["password"]);
-            $_SESSION['signed'] = true;
-            if(!$res){
-                echo "<b>Přihlášení se nezdařilo!<b><br><br>";
-                $_SESSION['signed'] = false;
-            }
-        }*/
-
-
+        }
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
@@ -60,5 +74,4 @@ class Login extends Controller
         }
     }
 }
-
 ?>

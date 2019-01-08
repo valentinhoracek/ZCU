@@ -1,19 +1,21 @@
 <div class="text-center">
     <h1>
-        ACCOUNT
+        Account
     </h1>
-    Change account information in database.
-
+    <div class="p-3 mb-2 bg-dark text-white"></div>
 </div>
 <div class="text-center">
     <form action="" method="POST">
         <?php
-            //echo $_SESSION['managedUser'];
-            $managing = false;
-            if ($_SESSION['managedUser']['LOGIN'] != $_SESSION['user']['LOGIN']) {
-                //echo "uprava nekoho jinyho";
-                $managing = true;
-            }
+        $managing = false;
+
+        /**
+         *  Whether I edit my account, or I manage other users.
+         */
+        if ($_SESSION['managedUser']['LOGIN'] != $_SESSION['user']['LOGIN'])
+        {
+            $managing = true;
+        }
         ?>
         <div class="form-group text-center">
             <label for="exampleInputLogin">Your Name</label>
@@ -92,6 +94,5 @@
         <?php
         }
         ?>
-
     </form>
 </div>

@@ -1,18 +1,28 @@
 <?php
 
+/**
+ * Class Editor
+ *
+ * On this site you can create new article, or edit and deleted selected one.
+ */
 class Editor extends Controller
 {
-   // protected $f;
-    //protected $editing = false;
-
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "editor";
         $this->metadata['title'] = "Editor - GeCon";
     }
 
+    /**
+     * Method for creating new article.
+     *
+     * @param $database
+     */
     public function createArticle($database)
     {
+        /**
+         * Check if inputs are filled.
+         */
         if (!$_POST['title'])
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -30,13 +40,19 @@ class Editor extends Controller
         }
         else
         {
-            if ($database->allArticleInfo($_POST['abstract']) != null)
+            /**
+             * Check if title is unique.
+             */
+            if ($database->allArticleInfo($_POST['title']) != null)
             {
                 echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Article with this title already exists! Choose different one.</div>";
             }
             else
             {
+                /**
+                 * Check uploaded file.
+                 */
                 if($_FILES['file']['type'] != "application/pdf")
                 {
                     echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -49,13 +65,13 @@ class Editor extends Controller
                 }
                 else
                 {
-                    $res = $database->addNewArticle(
+                    $result = $database->addNewArticle(
                         $_POST['title'],
                         $_FILES['file'],
                         $_POST['abstract'],
                         $_SESSION['user']['ID_USER']);
 
-                    if (!$res)
+                    if (!$result)
                     {
                         echo "<div class=\"alert alert-secondary\" role=\"alert\">
                             Failed to upload article!</div>";
@@ -66,15 +82,22 @@ class Editor extends Controller
                             Article uploaded!</div>";
                     }
                 }
-                //echo $_FILES['file']['tmp_name'];
             }
         }
     }
 
+    /**
+     * Method for deleting article and depending reviews.
+     *
+     * @param $database
+     */
     public function deleteArticle($database)
     {
-        $res = $database->deleteReviewsForArticle($_SESSION['editedArticle']['ID_ARTICLE']);
-        if (!$res)
+        /**
+         * Deleting depending reviews.
+         */
+        $result = $database->deleteReviewsForArticle($_SESSION['editedArticle']['ID_ARTICLE']);
+        if (!$result)
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Failed to delete reviews for article!</div>";
@@ -86,9 +109,12 @@ class Editor extends Controller
                     Reviews for article deleted!</div>";
         }
 
-        $res = $database->deleteArticle($_SESSION['editedArticle']['ID_ARTICLE']);
+        /**
+         * Deleting article info.
+         */
+        $result = $database->deleteArticle($_SESSION['editedArticle']['ID_ARTICLE']);
 
-        if (!$res)
+        if (!$result)
         {
             echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Failed to delete article info!</div>";
@@ -101,6 +127,11 @@ class Editor extends Controller
         }
     }
 
+    /**
+     * Method for updating article information.
+     *
+     * @param $database
+     */
     public function updateArticle($database)
     {
         if (!$_POST['title'])
@@ -115,7 +146,7 @@ class Editor extends Controller
         }
         else
         {
-            $res = $database->updateArticleInfo(
+            $result = $database->updateArticleInfo(
                 $_SESSION['editedArticle']['ID_ARTICLE'],
                 $_POST['title'],
                 $_SESSION['editedArticle']['FILE_NAME'],
@@ -125,7 +156,7 @@ class Editor extends Controller
                 $_SESSION['editedArticle']['STATE'],
                 $_SESSION['user']['ID_USER']);
 
-            if (!$res)
+            if (!$result)
             {
                 echo "<div class=\"alert alert-secondary\" role=\"alert\">
                             Failed to update article!</div>";
@@ -139,18 +170,27 @@ class Editor extends Controller
         }
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
-
+        /**
+         * Check if editing existing article.
+         */
         $_SESSION['editing'] = false;
         if (isset($_GET['edited']))
         {
-            // managing other users
-            //$_SESSION['managedUser'] = $_GET['manager'];
             $_SESSION['editedArticle'] = $database->allArticleInfo($_GET['edited']);
             $_SESSION['editing'] = true;
         }
 
+        /**
+         * Calling function respective to submitted button.
+         */
         if (isset($_POST['create']))
         {
             $this->createArticle($database);
@@ -165,7 +205,12 @@ class Editor extends Controller
         }
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
@@ -174,5 +219,4 @@ class Editor extends Controller
         }
     }
 }
-
 ?>

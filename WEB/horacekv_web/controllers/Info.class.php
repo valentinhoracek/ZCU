@@ -1,29 +1,39 @@
 <?php
-//Hlavní stránka
+
+/**
+ * Class Info
+ *
+ */
 class Info extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "info";
         $this->metadata['title'] = "Info - GeCon";
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
-        //$_SESSION['user'] = "";
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
-            //extract($this->osetri($this->data));
             extract($this->metadata, EXTR_PREFIX_ALL, "");
-            //require("views/" . $this->view . ".phtml");
             require ("views/structure.phtml");
         }
     }
 }
-
-
 ?>

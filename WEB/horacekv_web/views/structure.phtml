@@ -2,6 +2,9 @@
 
 include_once ("basic.phtml");
 
+/**
+ * Create head of the site.
+ */
 head(
     $this->metadata['title'],
     $this->metadata['keywords'],
@@ -9,10 +12,14 @@ head(
     $this->metadata['local_path']
 );
 
+/**
+ * Call required controller.
+ */
 require ("views/$this->view.phtml");
 
+/**
+ * Create foot of the site.
+ */
 foot();
-
-
 ?>
 

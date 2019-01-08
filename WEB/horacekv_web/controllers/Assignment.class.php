@@ -1,31 +1,51 @@
 <?php
-//Hlavní stránka
+
+/**
+ * Class Assignment
+ *
+ * Here can admin select reviewers for given article.
+ */
 class Assignment extends Controller
 {
-
-    protected $db;
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "assignment";
         $this->metadata['title'] = "Assignment - GaCon";
     }
 
-    public function work ($database)
+    /**
+     * Method for displaying users from which you can select one of them.
+     */
+    public function allReviewers()
     {
-        //$_SESSION['user'] = "";
-        //$_SESSION['signed'] = null;
+        foreach ($_SESSION['users'] as $u)
+        {
+            if ($u['ROLE'] != "AUTHOR")
+            {
+                echo "<option value=\"".$u['LOGIN']."\">".$u['LOGIN']."</option>";
+            }
+        }
+    }
 
-        $db = $database;
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
+    {
         if (isset($_GET['article']))
         {
-            // managing other users
-            //$_SESSION['managedUser'] = $_GET['manager'];
             $_SESSION['assignArticle'] = $database->allArticleInfo($_GET['article']);
         }
 
         $users = $database->allUsersInfo();
         $_SESSION['users'] = $users;
 
+        /**
+         * If assigment button is submitted.
+         */
         if (isset($_POST['assign']))
         {
             if (!$_POST['reviewer'])
@@ -35,12 +55,17 @@ class Assignment extends Controller
             }
             else
             {
-                // find id user with his login
+                /**
+                 * Get info of selected user.
+                 */
                 $assignedUser = $database->allUserInfo($_POST['reviewer']);
 
-                $res = $database->addNewReview($assignedUser['ID_USER'], $_SESSION['assignArticle']['ID_ARTICLE']);
+                /**
+                 * Create new review.
+                 */
+                $result = $database->addNewReview($assignedUser['ID_USER'], $_SESSION['assignArticle']['ID_ARTICLE']);
 
-                if (!$res)
+                if (!$result)
                 {
                     echo "<div class=\"alert alert-secondary\" role=\"alert\">
                     Failed to assign review!</div>";
@@ -54,19 +79,12 @@ class Assignment extends Controller
         }
     }
 
-    public function allReviewers()
-    {
-        //echo $db;
-        foreach ($_SESSION['users'] as $u)
-        {
-            if ($u['ROLE'] != "AUTHOR")
-            {
-                echo "<option value=\"".$u['LOGIN']."\">".$u['LOGIN']."</option>";
-            }
-        }
-    }
-
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {

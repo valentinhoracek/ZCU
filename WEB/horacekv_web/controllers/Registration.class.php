@@ -1,17 +1,31 @@
 <?php
 
+/**
+ * Class Registration
+ *
+ * Here you can register new user fo this site.
+ */
 class Registration extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "registration";
         $this->metadata['title'] = "Registration - GeCon";
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
         if (isset($_POST['signup']))
         {
+            /**
+             * Check if inputs are filled.
+             */
             if (!$_POST['fullName'])
             {
                 echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -39,6 +53,9 @@ class Registration extends Controller
             }
             else
             {
+                /**
+                 * Check if user's login is unique.
+                 */
                 if ($database->allUserInfo($_POST['login']) != null)
                 {
                     echo "<div class=\"alert alert-secondary\" role=\"alert\">
@@ -46,12 +63,18 @@ class Registration extends Controller
                 }
                 else
                 {
+                    /**
+                     * Create new user (With a role of AUTHOR).
+                     */
                     $database->addNewUser(
                         $_POST['fullName'],
                         $_POST['login'],
                         md5($_POST['password']),
                         $_POST['email']);
-                    // Login new user automatically
+
+                    /**
+                     * Login newly created user.
+                     */
                     $result = $database->userLogin($_POST['login'], $_POST['password']);
                     if (!$result)
                     {
@@ -66,11 +89,15 @@ class Registration extends Controller
                     }
                 }
             }
-
         }
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
@@ -79,5 +106,4 @@ class Registration extends Controller
         }
     }
 }
-
 ?>

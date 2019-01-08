@@ -1,21 +1,34 @@
 <?php
 
+/**
+ * Class Logout
+ */
 class Logout extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->view = "main";
         $this->metadata['title'] = "Logout - GeCon";
     }
 
-    public function work ($database)
+    /**
+     * Main method for each controller.
+     *
+     * @param $database
+     * @return mixed
+     */
+    public function work($database)
     {
-        //$_SESSION['user'] = "";
         $database->userLogout();
         $_SESSION['signed'] = false;
     }
 
-    public function display ()
+    /**
+     * Method for displaying content of this site.
+     *
+     * @return mixed
+     */
+    public function display()
     {
         if ($this->view)
         {
@@ -24,5 +37,4 @@ class Logout extends Controller
         }
     }
 }
-
 ?>
