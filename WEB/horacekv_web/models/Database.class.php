@@ -286,7 +286,6 @@ class Database{
         //print_r($res);
         if ($result != null && count($result) > 0)
         {
-            // vracim vse
             return $result;
         }
         else

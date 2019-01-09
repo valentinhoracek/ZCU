@@ -113,18 +113,48 @@ class Articles extends Controller
     {
         if (isset($_SESSION['articles'])) {
             foreach ($_SESSION['articles'] as $a) {
+
                 if ($a['STATE'] == "ACCEPTED") {
                     echo "
                 <tr>
                     <td>" . $a['TITLE'] . "</td>
-                    <td>" . $a['FILE_NAME'] . "</td>
+                    <th scope=\"row\">
+                        <form action=\"\" method=\"POST\">
+                            <button onclick=\"\"
+                                name=\"file_" . $a['ID_ARTICLE'] . "\" class=\"btn btn-dark col-12\" type=\"submit\">
+                                " . $a['FILE_NAME'] . "
+                            </button>
+                        </form>
+                    </th>
                     <td>" . $a['ABSTRACT'] . "</td>
-                    <td>" . $a['REVIEWS'] . "</td>
-                    <!--<td>" . $a['STATE'] . "</td>-->
-                    
+                    <td>" . $a['REVIEWS'] . "</td>      
                 </tr>";
                 }
+
             }
+        }
+    }
+
+    /**
+     * Method for downloading file from upload directory.
+     *
+     * @param $fileName
+     */
+    public function downloadFile($fileName)
+    {
+        $localPath = "uploads/";
+        $file = $localPath . $fileName;
+
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="'.basename($file).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
         }
     }
 
@@ -149,6 +179,17 @@ class Articles extends Controller
         else
         {
             $_SESSION['areReviews'] = false;
+        }
+
+        if (isset($_SESSION['articles']))
+        {
+            foreach ($_SESSION['articles'] as $a)
+            {
+                if (isset($_POST['file_' . $a['ID_ARTICLE']]))
+                {
+                    $this->downloadFile($a['FILE_NAME']);
+                }
+            }
         }
     }
 
